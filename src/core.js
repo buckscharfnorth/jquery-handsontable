@@ -1511,6 +1511,15 @@ Handsontable.Core = function (rootElement, settings) {
     });
   };
 
+  
+  /**
+   * Undo specific changes from current revision (for server-side update errors)
+   * @public
+   * @param {Array} indices of changes from the current revision to undo.
+   */
+  this.undoError = function (indices) {
+	priv.undoRedo.undoError(indices);
+  };
   /**
    * Listen to keyboard input
    */
@@ -1829,6 +1838,17 @@ Handsontable.Core = function (rootElement, settings) {
    */
   this.getCell = function (row, col) {
     return self.view.getCellAtCoords({row: row, col: col});
+  };
+
+  /**
+   * Returns <td> element corresponding to params row, property name
+   * @param {Number} row
+   * @param {String} prop
+   * @public
+   * @return {Element}
+   */
+  this.getCellAtRowProp = function (row, prop) {
+    return self.view.getCellAtCoords({row: row, col: self.propToCol(prop)});
   };
 
   /**

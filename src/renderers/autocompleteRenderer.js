@@ -9,9 +9,10 @@
  * @param {Object} cellProperties Cell properites (shared by cell renderer and editor)
  */
 Handsontable.AutocompleteRenderer = function (instance, TD, row, col, prop, value, cellProperties) {
+  TD.title = value;
   var TEXT = document.createElement('DIV');
   TEXT.className = 'htAutocomplete';
-
+  TEXT.style.width = TD.clientWidth - 5 + "px";
   var ARROW = document.createElement('DIV');
   ARROW.className = 'htAutocompleteArrow';
   ARROW.appendChild(document.createTextNode('\u25BC'));

@@ -26,17 +26,11 @@ Handsontable.CheckboxRenderer = function (instance, TD, row, col, prop, value, c
   if (value === cellProperties.checkedTemplate || value === Handsontable.helper.stringify(cellProperties.checkedTemplate)) {
     INPUT.checked = true;
     TD.appendChild(INPUT);
-  }
-  else if (value === cellProperties.uncheckedTemplate || value === Handsontable.helper.stringify(cellProperties.uncheckedTemplate)) {
-    TD.appendChild(INPUT);
-  }
-  else if (value === null) { //default value
-    INPUT.className += ' noValue';
-    TD.appendChild(INPUT);
+	TD.title = 'yes';
   }
   else {
-    TD.appendChild(document.createTextNode('#bad value#'));
-    //this is faster than innerHTML. See: https://github.com/warpech/jquery-handsontable/wiki/JavaScript-&-DOM-performance-tips
+    TD.appendChild(INPUT);
+	TD.title = 'no';
   }
 
   var $input = $(INPUT);

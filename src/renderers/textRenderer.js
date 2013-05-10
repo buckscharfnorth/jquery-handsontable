@@ -9,6 +9,7 @@
  * @param {Object} cellProperties Cell properites (shared by cell renderer and editor)
  */
 Handsontable.TextRenderer = function (instance, TD, row, col, prop, value, cellProperties) {
+  TD.title = value;
   var escaped = Handsontable.helper.stringify(value);
   if (escaped.match(/\n/)) {
     escaped = escaped.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;"); //escape html special chars

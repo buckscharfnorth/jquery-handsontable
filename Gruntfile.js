@@ -34,11 +34,14 @@ module.exports = function (grunt) {
 
         'src/renderers/textRenderer.js',
         'src/renderers/autocompleteRenderer.js',
+        'src/renderers/bitfieldRenderer.js',
         'src/renderers/checkboxRenderer.js',
+        'src/renderers/selectRenderer.js',
         'src/renderers/numericRenderer.js',
 
         'src/editors/textEditor.js',
         'src/editors/autocompleteEditor.js',
+        'src/editors/bitfieldEditor.js',
         'src/editors/checkboxEditor.js',
         'src/editors/dateEditor.js',
         'src/editors/handsontableEditor.js',

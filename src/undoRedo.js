@@ -6,7 +6,7 @@ Handsontable.UndoRedo = function (instance) {
   this.instance = instance;
   this.clear();
   instance.rootElement.on("datachange.handsontable", function (event, changes, origin) {
-    if (origin !== 'undo' && origin !== 'redo') {
+    if (origin !== 'undo' && origin !== 'undoError' && origin !== 'redo') {
       that.add(changes);
     }
   });
@@ -24,6 +24,29 @@ Handsontable.UndoRedo.prototype.undo = function () {
     }
     this.instance.setDataAtRowProp(setData, null, null, 'undo');
     this.rev--;
+  }
+};
+
+/**
+ * Undo specific change from current revision
+ * Won't add a redo operation since this undo is called due to an error
+ * If there are no more changes left in this revision, remove it and decrement revision number
+ * @param Array of indices of changes to undo from current revision
+ */
+Handsontable.UndoRedo.prototype.undoError = function (indices) {
+  if (this.isUndoAvailable()) {
+    indices.sort(function(a,b){
+      return a - b;
+    });
+    for (var i = indices.length -1; i >= 0; i--) {
+      var setData = this.data[this.rev].splice(indices[i],1);
+      setData[0].splice(3,1);
+      this.instance.setDataAtRowProp(setData, null, null, 'undoError');
+	}
+    if(!this.data[this.rev].length){
+      this.data.splice(this.rev,1);
+      this.rev--;
+    }
   }
 };
 
